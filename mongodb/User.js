@@ -1,31 +1,11 @@
 const mongoose = require('mongoose');
-const config = require('config');
-
-const MONGO_URI = config.get('MONGO_URI');
-
-mongoose.connect(MONGO_URI , {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-} , (err)=>{
-    if(err){
-        console.log(err);
-    }
-    console.log("connected to auth database")
-})
 
 const UserSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : true
-    },
-    email : {
-        type : String,
-        required : true
-    },
-    password : {
-        type : String,
-        required : true
-    }
+    name : {type : String},
+    email : {type : String},
+    password : {type : String},
+    fbId : {type : String},
+    fbToken : {type : String}
 },{
     timestamps : true
 })

@@ -7,6 +7,7 @@ router.get('/' , (req , res)=>{
 });
 
 router.get('/dashboard' , ensureAuthenticated ,(req , res)=>{
+    console.log(req.user)
     res.render('dashboard.pug' , {userName : req.user.name});
 })
 

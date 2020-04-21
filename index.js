@@ -5,8 +5,22 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+const config = require('config');
+
+const MONGO_URI = config.get('MONGO_URI');
 
 const app = express();
+
+//connect to mongodb
+mongoose.connect(MONGO_URI , {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+} , (err)=>{
+    if(err){
+        console.log(err);
+    }
+    console.log("connected to auth database")
+})
 
 //passport func
 require('./config/localstrat')(passport);
@@ -46,6 +60,13 @@ app.use(express.urlencoded({extended : false}));
 //routes
 app.use('/' , require('./routes/index'));
 app.use('/user' , require('./routes/users'));
+
+app.get('/auth/facebook' , passport.authenticate('facebook' , {scope : ['email']}));
+
+app.get('/auth/facebook/callback' , passport.authenticate('facebook' , {
+    successRedirect : '/dashboard',
+    failureRedirect : '/user/login'
+}))
 
 //set static file
 app.use(express.static(path.join(__dirname , "public")))

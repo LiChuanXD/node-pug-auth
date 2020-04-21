@@ -1,3 +1,5 @@
 {
-    "MONGO_URI" : "mongodb+srv://me:me123@authentication-0dh91.mongodb.net/test?retryWrites=true&w=majority"
+    "MONGO_URI" : "mongodb+srv://me:me123@authentication-0dh91.mongodb.net/test?retryWrites=true&w=majority",
+    "FACEBOOK_APP_ID" : 517815898888112,
+    "FACEBOOK_APP_SECRET" : "87f8ee3929e2926828820dc26da91e96"
 }
