@@ -26,8 +26,8 @@ module.exports = function(passport){
 
 
     passport.use(new FacebookStrategy({
-        clientID : 517815898888112,
-        clientSecret : '87f8ee3929e2926828820dc26da91e96',
+        clientID : FACEBOOK_APP_ID,
+        clientSecret : FACEBOOK_APP_SECRET,
         callbackURL : 'https://node-pug-auth.herokuapp.com/auth/facebook/callback',
         profileFields: ['id', 'emails', 'name'] 
     } , (accessToken , refreshToken , profile , done) => {
