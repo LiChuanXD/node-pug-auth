@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const helmet = require('helmet');
@@ -5,14 +6,11 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
-const config = require('config');
-
-const MONGO_URI = config.get('MONGO_URI');
 
 const app = express();
 
 //connect to mongodb
-mongoose.connect(MONGO_URI , {
+mongoose.connect(process.env.MONGO_URI , {
     useNewUrlParser: true,
     useUnifiedTopology: true
 } , (err)=>{

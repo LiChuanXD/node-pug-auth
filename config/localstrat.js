@@ -1,10 +1,8 @@
+require('dotenv').config();
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const bcrypt = require('bcryptjs');
 const User = require('../mongodb/User');
-const config = require('config');
-const FACEBOOK_APP_ID = config.get('FACEBOOK_APP_ID');
-const FACEBOOK_APP_SECRET = config.get('FACEBOOK_APP_SECRET');
 
 module.exports = function(passport){
     passport.use(new LocalStrategy({usernameField : "email"} , (email , password , done)=>{
@@ -26,8 +24,8 @@ module.exports = function(passport){
 
 
     passport.use(new FacebookStrategy({
-        clientID : FACEBOOK_APP_ID,
-        clientSecret : FACEBOOK_APP_SECRET,
+        clientID : process.env.FACEBOOK_APP_ID,
+        clientSecret : process.env.FACEBOOK_APP_SECRET,
         callbackURL : 'https://node-pug-auth.herokuapp.com/auth/facebook/callback',
         profileFields: ['id', 'emails', 'name'] 
     } , (accessToken , refreshToken , profile , done) => {
